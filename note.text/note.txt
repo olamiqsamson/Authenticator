@@ -1,0 +1,3 @@
+// HASHING ALOGORITHM 
+
+A hashing algorithm is a cryptographic hash function. It is a mathematical algorithm that maps data of arbitrary size to a hash of a fixed size. A hash function algorithm is designed to be a one-way function, infeasible to invert.
