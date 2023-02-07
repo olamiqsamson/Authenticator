@@ -4,7 +4,8 @@ const app = express()
 const PORT = 7777
 const mongoose = require("mongoose")
 const notFound = require('./middleware/notfound')
-const userRouter = require('./routes/userRoutes')
+// const userRouter = require('./routes/userRoutes')
+const newRouter = require('./routes/newUserRouter')
 mongoose.set("strictQuery", true);
 
 
@@ -12,7 +13,7 @@ mongoose.set("strictQuery", true);
 app.use(express.json())
 
 //ROUTES
-app.use(userRouter);
+app.use(newRouter);
 
 //ERROR ROUTE
 app.use(notFound);
