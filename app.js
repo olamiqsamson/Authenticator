@@ -9,12 +9,23 @@ const newRouter = require('./routes/newUserRouter')
 mongoose.set("strictQuery", true);
 
 
+app.set('view engine', 'ejs')
+
 //MIDDLEWARE
 app.use(express.json())
+app.use(express.urlencoded({extended: true}));
 
 //ROUTES
 app.use(newRouter);
-
+app.get("/signup", (req,res)=>{
+    res.status(200).render("signup")
+})
+app.get("/login", (req,res)=>{
+    res.status(200).render("login")
+})
+app.get("/dashboard", (req,res)=>{
+    res.status(200).render("dashboard")
+})
 //ERROR ROUTE
 app.use(notFound);
 

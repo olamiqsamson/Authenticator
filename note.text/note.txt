@@ -15,3 +15,6 @@ error handling
 authentication (session based (cookies) and token based) 
 protecting route using authentication 
 intergrating ejs views 
+install ejs
+setting view engine
+views folder----signup,login,dashboard

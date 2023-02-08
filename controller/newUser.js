@@ -8,11 +8,11 @@ const handleErrors = (err) => {
     errors.email = "Email is already in use";
     return errors;
   }
-  if (err.message === " User has not been registered yet") {
-    errors.email = "this email has notbeen registered";
+  if (err.message === "user is not registered yet") {
+    errors.email = "this email has not been registered";
     return errors;
   }
-  if (err.message === "invalid email or password") {
+  if (err.message === "Invalid email or password") {
     errors.email = " invalid email or password";
     errors.password = "invalid email or password";
     return errors;
@@ -34,7 +34,7 @@ const register = async (req, res) => {
     res.status(201).json({ success: true, data: user });
   } catch (error) {
     const errors = handleErrors(error);
-    res.status(400).json({errors});
+    res.status(400).json({success: false, errors});
     //handling error in the catch block
   }
 };
@@ -53,14 +53,14 @@ const login = async (req, res) => {
     if (user) {
       const authenticated = await bcrypt.compare(password, user.password);
       if (authenticated) {
-        res.status(200).json({ success: true, data: user });
+        return res.status(200).json({ success: true, data: user });
       }
       throw Error("Invalid email or password");
     }
     throw Error("user is not registered yet");
   } catch (error) {
     const errors = handleErrors(error);
-    res.status(400).json({errors});
+    res.status(400).json({success: false, errors});
   }
 };
 
