@@ -1,5 +1,12 @@
 const Users = require("../model/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
+
+//headers payload, signature
+
+const generateToken = (id) => {
+  return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "10h"})
+};
 
 const handleErrors = (err) => {
   //error messages error code = 11000
@@ -53,7 +60,10 @@ const login = async (req, res) => {
     if (user) {
       const authenticated = await bcrypt.compare(password, user.password);
       if (authenticated) {
-        return res.status(200).json({ success: true, data: user });
+        //token set
+        const token = generateToken(user._id);
+        const time = 3 * 24 * 60 * 60 * 1000;
+res.cookie('jwt', token, {maxAge: time});       return res.status(200).json({ success: true, data: user });
       }
       throw Error("Invalid email or password");
     }
@@ -64,4 +74,11 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+
+const logout = (req,res) => {
+res.cookie('jwt','',{ maxAge: 1000})
+
+res.redirect('/login')
+}
+
+module.exports = { register, login,logout };

@@ -7,16 +7,23 @@
     <title>DASHBOARD</title>
 </head>
 <body>
+
+    <a href="/logout">LOGOUT</a>
+    <div>
+        <marquee width="60%" direction="left" height="100px"><h1 >WELCOME TO YOUR DASHBOARD</h1></marquee>
+
+    </div>
+    
+    <% if(email){ %>
+    <h1>Welcome <%= email %></h1>
+<%} %>
     <nav>
         <ul>
-            <li><a href="/dashboard">dashboard</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
         </ul>
     </nav>
 
-    <div>
-        <marquee width="60%" direction="left" height="100px"><h1 >welcome to your dashboard</h1></marquee>
-
-    </div>
+    
 </form>
 
 </body>
